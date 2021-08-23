@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:issherunnin_flutter/constants/Colors.dart';
 // import 'package:issherunnin_flutter/subpages/update/updateLegionnaire.dart';
 import 'package:issherunnin_flutter/subpages/update/updateFlanders.dart';
+import 'package:issherunnin_flutter/subpages/update/updateBeaumont.dart';
 import '../update.dart';
 
 const String title = 'Update Ferry';
@@ -52,6 +53,7 @@ class UpdateBoat extends StatelessWidget {
                   child: Text(
                     'Flanders',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    textAlign: TextAlign.center,
                   ),
                 )),
             Container(
@@ -76,21 +78,18 @@ class UpdateBoat extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => UpdateLegionnaire()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UpdateBeaumont()),
+                  );
                 },
                 child: Text(
-                  'Legionnaire ',
+                  'Beaumont Hamel',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: Text(
-                    "(Updating currently disabled for legionnaire. It is currently in Fogo)")),
             Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: IconButton(

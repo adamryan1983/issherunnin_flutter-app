@@ -7,7 +7,7 @@ class AppColors {
   static const FOURTH_COLOR = Color(0xFFEE8C84);
   static const FIFTH_COLOR = Color(0xFFB5BD89);
 
-  static const MAINBGWHITE = Color(0xFFFCFCFC);
+  static const MAINBGWHITE = Color(0xFFFFFFFF);
   static const MAINTEXTBLACK = Color(0xFF171717);
   static const MAINTEXTWHITE = Color(0xFFFCFCFC);
   static const MAINBGBLACK = Color(0xFF171717);

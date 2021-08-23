@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:issherunnin_flutter/constants/Colors.dart';
-import '../utils/root.dart';
 
 class HomePage extends StatelessWidget {
   static Route<dynamic> route() => MaterialPageRoute(
@@ -39,7 +38,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(child: CheckLogged()),
           ],
         )));
   }

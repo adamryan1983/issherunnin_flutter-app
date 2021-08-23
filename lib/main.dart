@@ -3,7 +3,6 @@ import 'tabs.dart';
 import 'package:issherunnin_flutter/constants/Colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import './controllers/authBinding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +22,6 @@ class App extends StatelessWidget {
         }
       },
       child: GetMaterialApp(
-        initialBinding: AuthBinder(),
         title: "Is She Runnin'?",
         theme: ThemeData(
             fontFamily: 'Montserrat',
@@ -70,7 +68,9 @@ class SomethingWentWrong extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Container(child: Text("Ruh roh.")));
+    return MaterialApp(home: Container(child: Text("Ruh roh.")
+    )
+    );
   }
 }
 
@@ -92,9 +92,11 @@ class Loading extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white)),
+                      color: Colors.white)
+                      ),
             ),
-          ]),
+          ]
+          ),
     );
   }
 }
