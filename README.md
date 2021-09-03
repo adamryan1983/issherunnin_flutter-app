@@ -1,6 +1,8 @@
 # issherunnin_flutter
 
 A new Flutter project.
+V1.1 now available on the apple app store!
+V1.2 being built now with added features.
 
 ## Getting Started
 
