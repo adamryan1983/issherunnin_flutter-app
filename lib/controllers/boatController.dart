@@ -1,7 +1,6 @@
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:issherunnin_flutter/controllers/authController.dart';
 import '../tabs.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +27,6 @@ class BoatController extends GetxController {
       "status": status,
       "reason": reason,
       "note": note,
-      "user": Get.find<AuthController>().user,
     };
     await reference.add(legionnaire).then(
           (value) => Get.off(TabsPage()).catchError(
@@ -51,7 +49,6 @@ class BoatController extends GetxController {
       "status": status,
       "reason": reason,
       "note": note,
-      "user": Get.find<AuthController>().user,
     };
     await reference
         .add(flanders)
@@ -59,6 +56,30 @@ class BoatController extends GetxController {
               (onError) => Get.snackbar(
                   "Error while updating Ferry Status ", onError.message,
                   snackPosition: SnackPosition.BOTTOM),
-            ));
+            )
+        );
+  }
+
+  setBeaumontStatus(String status, String reason, String note) async {
+    if (status == 'Please select a status') {
+      status = 'delayed';
+    }
+
+    CollectionReference reference =
+        FirebaseFirestore.instance.collection("beaumont");
+
+    Map<String, dynamic> beaumont = {
+      "datetime": DateTime.now(),
+      "status": status,
+      "reason": reason,
+      "note": note,
+    };
+    await reference.add(beaumont).then(
+          (value) => Get.off(TabsPage()).catchError(
+            (onError) => Get.snackbar(
+                "Error while updating Ferry Status ", onError.message,
+                snackPosition: SnackPosition.BOTTOM),
+          ),
+        );
   }
 }

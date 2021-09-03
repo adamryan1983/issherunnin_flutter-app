@@ -25,32 +25,33 @@ class LineupPage extends StatelessWidget {
             width: 120,
             padding: EdgeInsets.all(4.0),
             child: Text(
-              dateConvert(timestamp, docs['datetime']),
+              dateConvert(timestamp, docs['datetime'])??'',
               // DateTime.fromMicrosecondsSinceEpoch(docs['datetime']).toDate().toString(),
-              style: TextStyle(fontSize: 12),
-            )),
+              style: TextStyle(fontSize: 12)??'na',
+            )
+            ),
         Container(
           width: 60,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['cars'],
-            style: TextStyle(fontSize: 12),
+            docs['cars']??'',
+            style: TextStyle(fontSize: 12)??'na',
           ),
         ),
         Container(
           width: 100,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['geolocation'],
-            style: TextStyle(fontSize: 12),
+            docs['geolocation']??'',
+            style: TextStyle(fontSize: 12)??'na',
           ),
         ),
         Container(
           width: 80,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['side'],
-            style: TextStyle(fontSize: 12, color: AppColors.MAINTEXTBLACK),
+            docs['side']??'',
+            style: TextStyle(fontSize: 12, color: AppColors.MAINTEXTBLACK)??'na',
           ),
         ),
       ],

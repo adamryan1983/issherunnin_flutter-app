@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:issherunnin_flutter/subpages/ferry.dart';
 import 'package:issherunnin_flutter/subpages/home.dart';
+import 'package:issherunnin_flutter/subpages/info.dart';
 import 'package:issherunnin_flutter/subpages/lineup.dart';
-import './utils/checkLogged.dart';
-import './utils/updateFunctionality.dart';
+import 'package:issherunnin_flutter/subpages/update.dart';
 
 class TabNavigationItem {
   final Widget page;
@@ -29,7 +29,7 @@ class TabNavigationItem {
           label: "Ferry",
         ),
         TabNavigationItem(
-          page: UpdateFunction(),
+          page: UpdatePage(),
           icon: Icon(Icons.add, size: 40),
           label: "Update",
         ),
@@ -39,9 +39,9 @@ class TabNavigationItem {
           label: "Lineup",
         ),
         TabNavigationItem(
-          page: CheckLogged(),
-          icon: Icon(Icons.person),
-          label: "User",
+          page: InfoPage(),
+          icon: Icon(Icons.info_outlined),
+          label: "Info",
         ),
       ];
 }

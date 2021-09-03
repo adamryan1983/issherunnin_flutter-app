@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:issherunnin_flutter/subpages/beaumont.dart';
 import 'flanders.dart';
-import 'legionnaire.dart';
+// import 'legionnaire.dart';
 import 'package:issherunnin_flutter/constants/Colors.dart';
 
 class FerryPage extends StatelessWidget {
@@ -22,7 +23,7 @@ class FerryPage extends StatelessWidget {
                   style: TextStyle(fontFamily: 'Montserrat', fontSize: 15),
                 ),
                 Text(
-                  "Legionnaire",
+                  "Beaumont Hamel",
                   style: TextStyle(fontFamily: 'Montserrat', fontSize: 15),
                 ),
               ],
@@ -33,7 +34,7 @@ class FerryPage extends StatelessWidget {
             backgroundColor: AppColors.PRIMARY_COLOR,
           ),
           body: TabBarView(
-            children: [Flanders(), Legionnaire()],
+            children: [Flanders(), Beaumont()],
           ),
         ),
       ),

@@ -12,7 +12,7 @@ String dateConvert(timestamp, raw) {
   return val;
 }
 
-class Legionnaire extends StatelessWidget {
+class Beaumont extends StatelessWidget {
   // DateFormat _dateFormat = DateFormat('y-MM-d');
   Widget _buildListItem(BuildContext context, DocumentSnapshot docs) {
     final Timestamp timestamp = docs['datetime'] as Timestamp;
@@ -20,18 +20,19 @@ class Legionnaire extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Container(
-            width: 120,
-            padding: EdgeInsets.all(4.0),
-            child: Text(
-              dateConvert(timestamp, docs['datetime']),
-              // DateTime.fromMicrosecondsSinceEpoch(docs['datetime']).toDate().toString(),
-              style: TextStyle(fontSize: 12),
-            )),
+          width: 120,
+          padding: EdgeInsets.all(4.0),
+          child: Text(
+            dateConvert(timestamp, docs['datetime'])??'',
+            // DateTime.fromMicrosecondsSinceEpoch(docs['datetime']).toDate().toString(),
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
         Container(
           width: 60,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['status'],
+            docs['status']??'',
             style: TextStyle(fontSize: 12),
           ),
         ),
@@ -39,7 +40,7 @@ class Legionnaire extends StatelessWidget {
           width: 100,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['reason'],
+            docs['reason']??'',
             style: TextStyle(fontSize: 12),
           ),
         ),
@@ -47,7 +48,7 @@ class Legionnaire extends StatelessWidget {
           width: 80,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['note'],
+            docs['note']??'',
             style: TextStyle(fontSize: 12, color: AppColors.MAINTEXTBLACK),
           ),
         ),
@@ -59,56 +60,63 @@ class Legionnaire extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     return Container(
-        child: Column(
-      children: <Widget>[
-        Container(
+      child: Column(
+        children: <Widget>[
+          Container(
             padding: EdgeInsets.all(20.0),
-            child: Text("Legionnaire Updates",
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Montserrat',
-                    fontSize: 22))),
-        Container(
-          height: 40.0,
-          color: AppColors.FIFTH_COLOR,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
+            child: Text(
+              "Beaumont Hamel Updates",
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Montserrat',
+                  fontSize: 22),
+            ),
+          ),
+          Container(
+            height: 40.0,
+            color: AppColors.FOURTH_COLOR,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
                   width: 120,
                   padding: EdgeInsets.all(4.0),
                   child: Text(
                     "Date/Time",
                     style: TextStyle(fontSize: 15),
-                  )),
-              Container(
+                  ),
+                ),
+                Container(
                   width: 60,
                   padding: EdgeInsets.all(4.0),
                   child: Text(
                     "Status",
                     style: TextStyle(fontSize: 15),
-                  )),
-              Container(
+                  ),
+                ),
+                Container(
                   width: 100,
                   padding: EdgeInsets.all(4.0),
                   child: Text(
                     "Reason",
                     style: TextStyle(fontSize: 15),
-                  )),
-              Container(
+                  ),
+                ),
+                Container(
                   width: 80,
                   padding: EdgeInsets.all(4.0),
                   child: Text(
                     "Notes",
                     style: TextStyle(fontSize: 15),
-                  )),
-            ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: StreamBuilder(
+          Expanded(
+            child: StreamBuilder(
               stream: firestore
-                  .collection('legionnaire')
+                  .collection('beaumont')
                   .orderBy('datetime', descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
@@ -125,12 +133,16 @@ class Legionnaire extends StatelessWidget {
                           _buildListItem(context, snapshot.data.docs[index]),
                     );
                   } else {
-                    return Center(child: Text('No items found'));
+                    return Center(
+                      child: Text('No items found'),
+                    );
                   }
                 }
-              }),
-        ),
-      ],
-    ));
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
