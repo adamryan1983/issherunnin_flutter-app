@@ -17,6 +17,9 @@ class LineupController extends GetxController {
     if (side == 'Please select a side' || side == '') {
       side = 'Bell Island';
     }
+    if (cars == '99') {
+      cars = 'NA';
+    }
     CollectionReference reference =
         FirebaseFirestore.instance.collection("lineup");
     Map<String, dynamic> userdata = {

@@ -31,11 +31,19 @@ class InfoPage extends StatelessWidget {
                 child: Text('https://thisisadamryan.me',
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.w600))),
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Text('There will be updates to this app over time to add more features.',
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500))),
+            
+            Flexible(
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  child: Text('You are running app version 1.2' + 
+                    '\nThe following features have been added since v1.1: ' + 
+                  '\n - Visual representation of boat condition on their names' +
+                  '\n - Notifications on status changes',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500)
+                          )
+                        ),
+            ),
             Container(
               padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
                 child: Text('This a community-driven product and depends on the cooperation of everyone as a whole to contribute accurate, sensible, and clean updates.',

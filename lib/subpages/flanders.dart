@@ -12,8 +12,9 @@ String dateConvert(timestamp, raw) {
   return val;
 }
 
+String boatStatus = "Hi";
 class Flanders extends StatelessWidget {
-  // DateFormat _dateFormat = DateFormat('y-MM-d');
+  String boatStatus = 'Running';
   Widget _buildListItem(BuildContext context, DocumentSnapshot docs) {
     final Timestamp timestamp = docs['datetime'] as Timestamp;
     return Row(
@@ -24,7 +25,6 @@ class Flanders extends StatelessWidget {
           padding: EdgeInsets.all(4.0),
           child: Text(
             dateConvert(timestamp, docs['datetime']),
-            // DateTime.fromMicrosecondsSinceEpoch(docs['datetime']).toDate().toString(),
             style: TextStyle(fontSize: 12),
           ),
         ),
@@ -37,7 +37,7 @@ class Flanders extends StatelessWidget {
           ),
         ),
         Container(
-          width: 100,
+          width: 90,
           padding: EdgeInsets.all(4.0),
           child: Text(
             docs['reason'],
@@ -45,7 +45,7 @@ class Flanders extends StatelessWidget {
           ),
         ),
         Container(
-          width: 80,
+          width: 90,
           padding: EdgeInsets.all(4.0),
           child: Text(
             docs['note'],
@@ -65,10 +65,11 @@ class Flanders extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              "Flanders Updates",
+              'Flanders Updates',
               style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Montserrat',
+                  color: boatStatus == 'Delayed' ? Colors.amber : boatStatus == 'Running' ? Colors.green : Colors.red,
                   fontSize: 22),
             ),
           ),
@@ -95,7 +96,7 @@ class Flanders extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 100,
+                  width: 90,
                   padding: EdgeInsets.all(4.0),
                   child: Text(
                     "Reason",
@@ -103,7 +104,7 @@ class Flanders extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 80,
+                  width: 90,
                   padding: EdgeInsets.all(4.0),
                   child: Text(
                     "Notes",
@@ -118,6 +119,7 @@ class Flanders extends StatelessWidget {
               stream: firestore
                   .collection('flanders')
                   .orderBy('datetime', descending: true)
+                  .limit(6)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -126,6 +128,7 @@ class Flanders extends StatelessWidget {
                   );
                 } else {
                   if (snapshot.data.docs.length > 0) {
+                    boatStatus = snapshot.data.docs[0].data()['status'];
                     return ListView.builder(
                       itemExtent: 80.0,
                       itemCount: snapshot.data.docs.length,

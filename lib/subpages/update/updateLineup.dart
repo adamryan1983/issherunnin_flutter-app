@@ -74,9 +74,10 @@ class _UpdateLineupState extends State<UpdateLineup> {
                         TextFormField(
                           decoration: InputDecoration(
                               labelText: "Enter number of vehicles",
-                              hintText: "i.e. 25"),
+                              hintText: "i.e. 25, 99 for unknown"),
                           autofocus: false,
                           keyboardType: TextInputType.number,
+                          maxLength: 2,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'(^\d*\.?\d{0,2})'))

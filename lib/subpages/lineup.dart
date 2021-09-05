@@ -9,13 +9,10 @@ String dateConvert(timestamp, raw) {
   int myvalue = timestamp.seconds;
   var val = df.format(new DateTime.fromMillisecondsSinceEpoch(myvalue * 1000));
 
-  // var timetime =
-  //     DateTime.fromMicrosecondsSinceEpoch(timeSec).toDate().toString();
   return (val);
 }
 
 class LineupPage extends StatelessWidget {
-  // DateFormat _dateFormat = DateFormat('y-MM-d');
   Widget _buildListItem(BuildContext context, DocumentSnapshot docs) {
     final Timestamp timestamp = docs['datetime'] as Timestamp;
     return Row(
@@ -26,12 +23,11 @@ class LineupPage extends StatelessWidget {
             padding: EdgeInsets.all(4.0),
             child: Text(
               dateConvert(timestamp, docs['datetime'])??'',
-              // DateTime.fromMicrosecondsSinceEpoch(docs['datetime']).toDate().toString(),
               style: TextStyle(fontSize: 12)??'na',
             )
             ),
         Container(
-          width: 60,
+          width: 40,
           padding: EdgeInsets.all(4.0),
           child: Text(
             docs['cars']??'',
@@ -39,7 +35,7 @@ class LineupPage extends StatelessWidget {
           ),
         ),
         Container(
-          width: 100,
+          width: 120,
           padding: EdgeInsets.all(4.0),
           child: Text(
             docs['geolocation']??'',
@@ -50,7 +46,7 @@ class LineupPage extends StatelessWidget {
           width: 80,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['side']??'',
+            docs['side']??'n/a',
             style: TextStyle(fontSize: 12, color: AppColors.MAINTEXTBLACK)??'na',
           ),
         ),
@@ -92,14 +88,14 @@ class LineupPage extends StatelessWidget {
                         style: TextStyle(fontSize: 15),
                       )),
                   Container(
-                      width: 60,
+                      width: 45,
                       padding: EdgeInsets.all(4.0),
                       child: Text(
                         "Cars",
                         style: TextStyle(fontSize: 15),
                       )),
                   Container(
-                      width: 100,
+                      width: 115,
                       padding: EdgeInsets.all(4.0),
                       child: Text(
                         "Location",
@@ -120,6 +116,7 @@ class LineupPage extends StatelessWidget {
                 stream: firestore
                     .collection('lineup')
                     .orderBy('datetime', descending: true)
+                    .limit(7)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {

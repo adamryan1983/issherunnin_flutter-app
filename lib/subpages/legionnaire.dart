@@ -110,6 +110,7 @@ class Legionnaire extends StatelessWidget {
               stream: firestore
                   .collection('legionnaire')
                   .orderBy('datetime', descending: true)
+                  .limit(6)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {

@@ -8,12 +8,11 @@ String dateConvert(timestamp, raw) {
   final df = new DateFormat('dd-MM-yyyy hh:mm a');
   int myvalue = timestamp.seconds;
   var val = df.format(new DateTime.fromMillisecondsSinceEpoch(myvalue * 1000));
-
   return val;
 }
 
 class Beaumont extends StatelessWidget {
-  // DateFormat _dateFormat = DateFormat('y-MM-d');
+  String boatStatus = 'Running';
   Widget _buildListItem(BuildContext context, DocumentSnapshot docs) {
     final Timestamp timestamp = docs['datetime'] as Timestamp;
     return Row(
@@ -23,8 +22,7 @@ class Beaumont extends StatelessWidget {
           width: 120,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            dateConvert(timestamp, docs['datetime'])??'',
-            // DateTime.fromMicrosecondsSinceEpoch(docs['datetime']).toDate().toString(),
+            dateConvert(timestamp, docs['datetime']) ?? '',
             style: TextStyle(fontSize: 12),
           ),
         ),
@@ -32,7 +30,7 @@ class Beaumont extends StatelessWidget {
           width: 60,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['status']??'',
+            docs['status'] ?? '',
             style: TextStyle(fontSize: 12),
           ),
         ),
@@ -40,7 +38,7 @@ class Beaumont extends StatelessWidget {
           width: 100,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['reason']??'',
+            docs['reason'] ?? '',
             style: TextStyle(fontSize: 12),
           ),
         ),
@@ -48,7 +46,7 @@ class Beaumont extends StatelessWidget {
           width: 80,
           padding: EdgeInsets.all(4.0),
           child: Text(
-            docs['note']??'',
+            docs['note'] ?? '',
             style: TextStyle(fontSize: 12, color: AppColors.MAINTEXTBLACK),
           ),
         ),
@@ -69,7 +67,8 @@ class Beaumont extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Montserrat',
-                  fontSize: 22),
+                  fontSize: 22,
+                  color: boatStatus == 'Delayed' ? Colors.amber : boatStatus == 'Running' ? Colors.green : Colors.red),
             ),
           ),
           Container(
@@ -118,6 +117,7 @@ class Beaumont extends StatelessWidget {
               stream: firestore
                   .collection('beaumont')
                   .orderBy('datetime', descending: true)
+                  .limit(6)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -126,6 +126,7 @@ class Beaumont extends StatelessWidget {
                   );
                 } else {
                   if (snapshot.data.docs.length > 0) {
+                    boatStatus = snapshot.data.docs[0].data()['status'];
                     return ListView.builder(
                       itemExtent: 80.0,
                       itemCount: snapshot.data.docs.length,
